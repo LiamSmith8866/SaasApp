@@ -13,7 +13,7 @@ import lsRoutes from "./routes/lsRoutes.js";
 import webhookRoutes from "./routes/webhookRoutes.js";
 import usageRoutes from "./routes/usageRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
-import mockProRoutes from "./routes/mockProRoutes.js";
+
 
 import taskRoutes from "./routes/taskRoutes.js";
 
@@ -66,7 +66,7 @@ app.use("/api/ls", lsRoutes);
 app.use("/api/webhook", webhookRoutes);
 app.use("/api/usage", usageRoutes);
 app.use("/api/payment", paymentRoutes);
-app.use("/api/mock-pro", mockProRoutes); 
+
 app.use("/api/tasks", taskRoutes);
 // 3. 启动
 mongoose
