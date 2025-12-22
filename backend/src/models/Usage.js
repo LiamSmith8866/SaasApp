@@ -1,19 +1,31 @@
+// backend/src/models/Usage.js
 import mongoose from "mongoose";
 
 const usageSchema = new mongoose.Schema(
   {
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-
-    // 当前周期剩余次数
-    ocrCount: { type: Number, default: 10 }, // 免费用户每天默认 10 次
-  
-    // 用户是否是 Pro
-    isPro: { type: Boolean, default: false },
-
-    // 上次重置的日期
-    lastReset: { type: Date, default: Date.now }
-  }
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      unique: true, // 确保一个用户只有一个 Usage 记录
+    },
+    // 已使用次数
+    ocrCount: {
+      type: Number,
+      default: 0, // 👈 必须有默认值
+    },
+    // 总额度 (6 代表免费版，-1 代表无限)
+    ocrLimit: {
+      type: Number,
+      default: 6, // 👈 必须有默认值
+    },
+    // 是否是 Pro
+    isPro: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
 );
 
 export default mongoose.model("Usage", usageSchema);
-

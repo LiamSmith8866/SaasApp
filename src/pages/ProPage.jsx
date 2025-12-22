@@ -40,7 +40,7 @@ export default function ProPage() {
         </div>
 
         <p className="text-center text-gray-500 mt-4">
-          Only <strong>$9.99/month</strong> — cancel anytime.
+          Only <strong>$9.9/month</strong> — cancel anytime.
         </p>
       </div>
     </div>

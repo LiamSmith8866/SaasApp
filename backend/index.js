@@ -35,7 +35,7 @@ app.post("/ocr", verifyToken, upload.single("file"), async (req, res) => {
   try {
     const userId = req.user.sub;
 
-    console.log("用户 ID：", userId);
+    console.log("User ID：", userId);
 
     const file = req.file;
 
@@ -55,7 +55,7 @@ app.post("/ocr", verifyToken, upload.single("file"), async (req, res) => {
     const result = await apiRes.json();
 
     const parsedText =
-      result?.ParsedResults?.[0]?.ParsedText || "未识别到文本";
+      result?.ParsedResults?.[0]?.ParsedText || "Text not recognized";
 
     res.json({
       userId,

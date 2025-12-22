@@ -21,7 +21,7 @@ export default function Register() {
         navigate("/login");
       }, 1200);
     } else {
-      setMsg(res.error || "Register failed");
+      setMsg(res.message || "Register failed");
     }
   };
 

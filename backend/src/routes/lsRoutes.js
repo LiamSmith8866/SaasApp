@@ -1,49 +1,25 @@
+// src/routes/lsRoutes.js
 import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
 
-// Routes
-import authRoutes from "./authRoutes.js";
-import usageRoutes from "./usageRoutes.js";
-import ocrRoutes from "./ocrRoutes.js";
+// 引入 webhook 处理逻辑 (保留你原本的引用)
+// 注意：请确保同目录下确实有 lsWebhook.js 这个文件
 import lsWebhook from "./lsWebhook.js";
-import paymentRoutes from "./paymentRoutes.js";
 
-dotenv.config();
-const app = express();
+const router = express.Router();
 
-// ⚠️ Lemon Squeezy webhook 必须在 express.json() 之前
-app.use("/api/ls/webhook", lsWebhook);
+// ==========================================
+// 路由定义
+// ==========================================
 
-// Middlewares
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
+// 1. 挂载 Webhook
+// 在 server.js 里，这个文件被挂载到了 /api/ls
+// 所以下面这行代码会让 webhook 的最终访问路径变成:
+// POST /api/ls/webhook
+router.use("/webhook", lsWebhook);
 
-app.use(cookieParser());
-app.use(express.json());
-
-// API Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/usage", usageRoutes);
-app.use("/api/ocr", ocrRoutes);
-//app.use("/api/ls", lsRoutes);
-app.use("/api/payments", paymentRoutes);
-
-// Test
-app.get("/", (req, res) => {
-  res.send("API Server Running...");
+// 2. (可选) 添加一个测试接口，验证 ls 路由通了
+router.get("/test", (req, res) => {
+  res.json({ message: "Lemon Squeezy Routes are working!" });
 });
 
-// Database
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected successfully"))
-  .catch((err) => console.error("MongoDB error:", err));
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("Backend running on port " + PORT));
-
-export default app;
+export default router;

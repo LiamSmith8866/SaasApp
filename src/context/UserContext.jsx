@@ -1,146 +1,137 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-
-const API_BASE_URL = "http://localhost:5000";
+// src/context/UserContext.jsx
+import React, { createContext, useState, useContext, useEffect, useCallback } from "react";
+import { API_URL } from "../config"; // 引入配置
 
 const UserContext = createContext();
 
+export const useUser = () => useContext(UserContext);
+
 export const UserProvider = ({ children }) => {
+  // 1. 用户身份状态
   const [user, setUser] = useState(null);
-  const [usage, setUsage] = useState({ ocrCount: 0, isPro: false });
   const [loading, setLoading] = useState(true);
+  
+  // 2. ✅ 新增：用量状态 (Usage State)
+  // 专门用来存储 OCR 剩余次数和 Pro 状态
+  const [usage, setUsage] = useState({
+    remaining: "-",
+    ocrLimit: "-",
+    isPro: false,
+    loading: true
+  });
+ 
 
-  /** -------------------------
-   * 获取完整用户信息 + 使用次数
-   * ------------------------- */
-  const fetchFullUser = async () => {
+  // fetch(`${API_URL}/api/tasks`, ...) // 使用变量拼接
+  // 3. ✅ 新增：获取用量的函数 (Dashboard 和 OCR 页面都要用)
+  const fetchUsage = useCallback(async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
-        credentials: "include",
+      // 这里的 loading 不影响全局 loading，只影响数字显示
+      setUsage(prev => ({ ...prev, loading: true }));
+      
+      const res = await fetch(`${API_URL}/api/usage/me`, { 
+        credentials: "include" // 必须带 Cookie
       });
-
-      const data = await res.json();
-      if (!data.user) {
-        setUser(null);
-        setUsage({ ocrCount: 0, isPro: false });
-        return;
+      
+      if (res.ok) {
+        const data = await res.json();
+        setUsage({ ...data, loading: false });
       }
-
-      // 获取 OCR 次数
-      const usageRes = await fetch(`${API_BASE_URL}/api/usage/me`, {
-        credentials: "include",
-      });
-
-      const usageData = await usageRes.json();
-
-      setUser(data.user);
-      setUsage({
-        ocrCount: usageData.ocrCount ?? 0,
-        isPro: usageData.isPro ?? false,
-      });
-
-    } catch (err) {
-      console.error("Fetch user error:", err);
-      setUser(null);
+    } catch (error) {
+      console.error("Failed to fetch usage:", error);
+      setUsage(prev => ({ ...prev, loading: false }));
     }
-  };
-
-  /** -------------------------
-   * 页面初始化加载
-   * ------------------------- */
-  useEffect(() => {
-    const init = async () => {
-      await fetchFullUser();
-      setLoading(false);
-    };
-    init();
   }, []);
 
-  /** -------------------------
-   * 注册
-   * ------------------------- */
-  const register = async (email, password) => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-        credentials: "include",
-      });
+  // 4. 初始检查登录状态
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/auth/me`, { 
+          credentials: "include" 
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data.user);
+          // 如果登录成功，顺便去拉取一下用量数据
+          fetchUsage();
+        }
+      } catch (error) {
+        console.log("Not logged in");
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkUser();
+  }, [fetchUsage]);
 
-      const data = await res.json();
-      if (!res.ok) return { success: false, message: data.message };
-
-      await fetchFullUser();
-      return { success: true };
-    } catch (err) {
-      return { success: false, message: "Server error" };
+  // 当 user 变化时（比如刚登录），也确保拉取一次用量
+  useEffect(() => {
+    if (user) {
+      fetchUsage();
     }
-  };
+  }, [user, fetchUsage]);
 
-  /** -------------------------
-   * 登录
-   * ------------------------- */
+  // --- 登录逻辑 ---
   const login = async (email, password) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
-        credentials: "include",
+        credentials: 'include'
       });
-
       const data = await res.json();
-      if (!res.ok) return { success: false, message: data.message };
-
-      await fetchFullUser();
-      return { success: true };
-
+      if (data.success) {
+        setUser(data.user);
+        return { success: true };
+      }
+      return { success: false, message: data.message };
     } catch (err) {
-      return { success: false, message: "Server error" };
+      return { success: false, message: "Network error" };
     }
   };
 
-  /** -------------------------
-   * 扣减 OCR 次数
-   * ------------------------- */
-  const decreaseUsage = async () => {
-    const res = await fetch(`${API_BASE_URL}/api/usage/decrease`, {
-      method: "POST",
-      credentials: "include",
-    });
-
-    await fetchFullUser(); // 立即刷新次数
+  // --- 注册逻辑 ---
+  const register = async (email, password) => {
+    try {
+      const res = await fetch(`${API_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      return { success: false, message: "Network error" };
+    }
   };
 
-  /** -------------------------
-   * 登出
-   * ------------------------- */
+  // --- 退出逻辑 ---
   const logout = async () => {
-    await fetch(`${API_BASE_URL}/api/auth/logout`, {
-      method: "POST",
-      credentials: "include",
-    });
-
-    setUser(null);
-    setUsage({ ocrCount: 0, isPro: false });
+    try {
+      await fetch(`${API_URL}/api/auth/logout`, { 
+        method: 'POST', 
+        credentials: 'include' 
+      });
+      setUser(null);
+      // 退出时清空用量数据
+      setUsage({ remaining: "-", ocrLimit: "-", isPro: false, loading: true });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  return (
-    <UserContext.Provider
-      value={{
-        user,
-        usage,
-        loading,
-        register,
-        login,
-        logout,
-        decreaseUsage,
-        fetchFullUser,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
-};
+  const value = {
+    user,
+    setUser,
+    loading,
+    login,
+    register,
+    logout,
+    // ✅ 把 usage 和 fetchUsage 暴露给所有组件使用
+    usage,
+    fetchUsage,
+  };
 
-export const useUser = () => useContext(UserContext);
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
