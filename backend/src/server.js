@@ -22,9 +22,22 @@ dotenv.config();
 const app = express();
 const PORT = 5001; 
 
-// backend/src/server.js
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://saas-app-88.vercel.app", // 👈 把你 Vercel 的真实域名填在这里
+  // 如果你有自定义域名，也加在这里，比如 "https://www.mysaas.com"
+];
 
-// ... imports ...
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // 允许带 cookie
+}));
 
 // 1. 核心修改：CORS 配置
 app.use(
