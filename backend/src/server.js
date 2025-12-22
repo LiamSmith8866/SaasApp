@@ -25,6 +25,7 @@ const PORT = 5001;
 const allowedOrigins = [
   "http://localhost:5173",
   "https://saas-app-88.vercel.app", // 👈 把你 Vercel 的真实域名填在这里
+  "https://saas-app-ten-gold.vercel.app"
   // 如果你有自定义域名，也加在这里，比如 "https://www.mysaas.com"
 ];
 
