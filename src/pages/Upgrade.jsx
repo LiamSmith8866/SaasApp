@@ -73,7 +73,7 @@ const Upgrade = () => {
       // 注入 userId 作为 tag
       window.fastspring.builder.tag('userId', user._id);
        //临时测试用，正式上线后删除
-      //window.fastspring.builder.promo('00000'); 
+      window.fastspring.builder.promo('00000'); 
       // 打开支付弹窗
       window.fastspring.builder.checkout();
 
