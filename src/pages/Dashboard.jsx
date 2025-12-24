@@ -7,6 +7,11 @@ import { useUser } from "../context/UserContext"; // 引入全局状态
 export default function Dashboard() {
   // ✅ 获取全局 usage，而不是本地 stats
   const { usage } = useUser();
+  const getNextBillingDate = () => {
+    const date = new Date();
+    date.setMonth(date.getMonth() + 1); // 下个月
+    return date.toISOString().split('T')[0]; // 格式化为 YYYY-MM-DD
+  };
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -85,10 +90,12 @@ export default function Dashboard() {
           
           <div className="mt-4">
              {usage.isPro ? (
-               <p className="text-sm text-gray-300">Next deduction: 2025-12-12</p>
+               <p className="text-sm text-gray-400">
+               Next deduction: {getNextBillingDate()}
+               </p>
              ) : (
                <Link to="/upgrade" className="text-sm font-bold text-blue-600 hover:underline">
-                 Upgrade to unlock more features &rarr;
+                 Upgrade to unlock more &rarr;
                </Link>
              )}
           </div>

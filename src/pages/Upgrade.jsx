@@ -3,7 +3,7 @@ import { useUser } from "../context/UserContext";
 import { CheckCircle, Zap } from "lucide-react";
 
 const Upgrade = () => {
-  const { user } = useUser();
+  const { user , fetchUsage} = useUser();
   const [loading, setLoading] = useState(false);
 
   // 1. 动态加载 FastSpring 脚本
@@ -25,11 +25,32 @@ const Upgrade = () => {
     document.head.appendChild(script);
 
     // 定义全局回调防止报错
-    window.onFSPopupClosed = () => {
+    window.onFSPopupClosed = (orderReference) => {
         console.log("The payment window has closed");
         setLoading(false);
-    };
-  }, []);
+
+        if (orderReference) {
+          // 如果有订单号，说明可能支付成功了
+          console.log("Order detected:", orderReference);
+          alert("Payment processing is underway. Please wait a moment...");
+          
+          // 延迟几秒刷新用户状态 (给 Webhook 一点时间)
+          setTimeout(() => {
+              fetchUsage(); 
+              // 可选：跳转回 Dashboard
+              // window.location.href = "/dashboard";
+          }, 3000);
+      } else {
+          console.log("The user closed the window but failed to make the payment");
+      }
+        };
+        
+        // 清理函数
+        return () => {
+            delete window.onFSPopupClosed;
+        };
+
+  }, [fetchUsage]);
 
   const handleCheckout = () => {
     if (!user) return alert("Please log in first");
@@ -51,7 +72,8 @@ const Upgrade = () => {
 
       // 注入 userId 作为 tag
       window.fastspring.builder.tag('userId', user._id);
-
+       //临时测试用，正式上线后删除
+      //window.fastspring.builder.promo('00000'); 
       // 打开支付弹窗
       window.fastspring.builder.checkout();
 
