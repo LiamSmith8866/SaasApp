@@ -91,7 +91,7 @@ export default function Dashboard() {
           <div className="mt-4">
              {usage.isPro ? (
                <p className="text-sm text-gray-400">
-               Next deduction: {getNextBillingDate()}
+               Next deduction: {usage.nextBillingDate || "Unknown"}
                </p>
              ) : (
                <Link to="/upgrade" className="text-sm font-bold text-blue-600 hover:underline">

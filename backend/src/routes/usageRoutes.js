@@ -57,7 +57,8 @@ router.get("/me", authMiddleware, async (req, res) => {
       ocrCount: usage.ocrCount,
       ocrLimit: limitDisplay, // 返回给前端显示总额度
       remaining: remainingDisplay,
-      isPro: usage.isPro
+      isPro: usage.isPro,
+      nextBillingDate: nextBillingDate
     });
 
   } catch (error) {

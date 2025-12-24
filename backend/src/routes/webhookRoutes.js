@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/fastspring", async (req, res) => {
   try {
-    console.log("⚡️ 收到 FastSpring Webhook 请求!");
+    console.log("⚡️ Received a FastSpring Webhook request!");
     
     // 1. 打印收到的完整数据 (用于调试)
     // console.log("Headers:", JSON.stringify(req.headers, null, 2));
@@ -15,12 +15,12 @@ router.post("/fastspring", async (req, res) => {
     const events = req.body.events; 
 
     if (!events || !Array.isArray(events)) {
-        console.log("⚠️ 没有检测到 events 数组");
+        //console.log("⚠️ 没有检测到 events 数组");
         return res.status(200).send("No events");
     }
 
     for (const event of events) {
-      console.log(`处理事件类型: ${event.type}`);
+      console.log(`Handle event types: ${event.type}`);
 
       // 只要是订单完成，或者是订阅激活
       if (event.type === "order.completed" || event.type === "subscription.activated") {
@@ -30,18 +30,18 @@ router.post("/fastspring", async (req, res) => {
         const userId = data.tags?.userId;
 
         if (userId) {
-          console.log(`✅ 找到 UserID: ${userId}，正在升级...`);
+          console.log(`✅ Found UserID: ${userId},Under upgrade...`);
           
           // 更新数据库
           await Usage.findOneAndUpdate(
             { userId },
-            { isPro: true, ocrLimit: -1 }
+            { isPro: true, ocrLimit: -1 , proSince: new Date() }
           );
           await User.findByIdAndUpdate(userId, { isPro: true });
           
-          console.log(`🎉 用户 ${userId} 升级成功！`);
+          console.log(`🎉 User ${userId} Upgrade successful！`);
         } else {
-            console.error("❌ 订单中没有 userId tag！请检查前端 Upgrade.jsx 是否注入了 tag");
+            console.error("error");
         }
       }
     }
@@ -49,7 +49,7 @@ router.post("/fastspring", async (req, res) => {
     res.status(200).send("OK");
 
   } catch (err) {
-    console.error("❌ Webhook 处理出错:", err.message);
+    console.error("❌ Webhook Processing error:", err.message);
     // 即使出错也返回 200，防止 FastSpring 重试导致死循环
     res.status(200).send("Error logged");
   }

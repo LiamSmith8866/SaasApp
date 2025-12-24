@@ -24,6 +24,8 @@ const usageSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    // ✅ 新增：记录成为 Pro 的时间
+    proSince: { type: Date }, 
   },
   { timestamps: true }
 );
