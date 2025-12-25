@@ -26,12 +26,10 @@ const Upgrade = () => {
 
     // 定义全局回调防止报错
     window.onFSPopupClosed = (orderReference) => {
-        console.log("The payment window has closed");
         setLoading(false);
 
         if (orderReference) {
           // 如果有订单号，说明可能支付成功了
-          console.log("Order detected:", orderReference);
           alert("Payment processing is underway. Please wait a moment...");
           
           // 延迟几秒刷新用户状态 (给 Webhook 一点时间)
@@ -120,6 +118,14 @@ const Upgrade = () => {
           {loading ? "Loading..." : <><Zap size={20} /> Upgrade now</>}
         </button>
       </div>
+      <footer className="site-footer">
+        <div className="footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <span> · </span>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </footer>
+
     </div>
   );
 };

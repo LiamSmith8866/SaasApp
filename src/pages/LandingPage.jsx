@@ -51,9 +51,20 @@ const LandingPage = () => {
           >
             Try it for free now
           </Link>
+         
         )}
+        
       </div>
+      <footer className="site-footer">
+        <div className="footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <span> · </span>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </footer>
+
     </div>
+     
   );
 };
 

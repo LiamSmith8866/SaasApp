@@ -13,7 +13,8 @@ import Register from './pages/Register'; // 假设你有这个注册页
 import Upgrade from "./pages/Upgrade";
 import UpgradeSuccess from "./pages/UpgradeSuccess";
 import UserDashboard from "./pages/UserDashboard";
-
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 // --- 路由守卫组件 ---
 
 // 1. 受保护路由：只有登录才能看，且自动包裹 Layout
@@ -45,13 +46,15 @@ export default function App() {
   return (
     <Router>
       <UserProvider>
+
         <Routes>
           
           {/* === 第一部分：不需要侧边栏的页面 === */}
           
           {/* 1. 官网首页 (所有人可见) */}
           <Route path="/" element={<LandingPage />} />
-
+          <Route path="/privacy" element={<Privacy />} /> 
+          <Route path="/terms" element={<Terms />} /> 
           {/* 2. 登录/注册 (只给未登录用户) */}
           <Route 
             path="/login" 
@@ -97,53 +100,4 @@ export default function App() {
     </Router>
   );
 }
-/*import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./layout/Layout";
-import Dashboard from "./pages/Dashboard";
-import Tasks from "./pages/Tasks";
-import OCR from "./pages/OCR";
-import { UserProvider } from "./context/UserContext";
-import { useUser } from "./context/UserContext";
-import Login from './pages/Login';
-import Upgrade from "./pages/Upgrade";
-import UpgradeSuccess from "./pages/UpgradeSuccess";
-import UserDashboard from "./pages/UserDashboard";
-
-export default function App() {
-function PrivateRoute({children}){
-const { user,loading } =useUser();
-if (loading) return <div>Loading...</div>
-if(!user) return <Login />
- return children;
-   }
-return (
-<Router>
-<UserProvider>
-<Layout>
-<Routes>
-     <Route path="/login" element={<Login />} />
-
-     <Route
-           /*path="/"
-          element={
-            <PrivateRoute>
-              <Layout />
-            </PrivateRoute>
-          } */
-        /*>
-          <Route index element={<Dashboard />} />
-          <Route path="tasks" element={<Tasks />} />
-          <Route path="ocr" element={<OCR />} /> 
-          <Route path="/upgrade" element={<Upgrade />} />
-          <Route path="/upgrade-success" element={<UpgradeSuccess />} />
-          <Route path="/account" element={<UserDashboard />} />
-        
-        </Route>
-     </Routes>
-     </Layout>
-   </UserProvider>
-  </Router>
-   )
-}*/
 

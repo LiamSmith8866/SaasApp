@@ -24,8 +24,6 @@ export const handleLemonWebhook = async (req, res) => {
     const eventType = event.meta.event_name;
     const email = event.data.attributes.user_email;
 
-    console.log("Webhook received:", eventType, email);
-
     if (!email) return res.json({ message: "No email in webhook" });
 
     // 找对应用户

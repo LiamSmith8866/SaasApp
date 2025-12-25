@@ -27,7 +27,7 @@ export const runOCR = async (req, res) => {
       baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1", 
     });
 
-    console.log("Requesting AI analysis (in JSON mode)...");
+   
 
     // ===========================
     // 🧠 Prompt 优化：强制提取任务，即使内容很少
@@ -74,7 +74,7 @@ export const runOCR = async (req, res) => {
     let resultText = completion.choices[0].message.content;
     
     // 🔍 调试日志：看看 AI 到底返回了什么
-    console.log("🤖 AI Raw Response:", resultText);
+   
 
     // 数据清洗
     resultText = resultText.replace(/```json|```/g, "").trim();

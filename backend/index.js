@@ -35,8 +35,6 @@ app.post("/ocr", verifyToken, upload.single("file"), async (req, res) => {
   try {
     const userId = req.user.sub;
 
-    console.log("User ID：", userId);
-
     const file = req.file;
 
     if (!file) return res.status(400).json({ error: "No file uploaded" });

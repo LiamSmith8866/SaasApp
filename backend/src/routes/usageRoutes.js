@@ -12,7 +12,6 @@ router.get("/me", authMiddleware, async (req, res) => {
 
     // 1. 如果完全没记录 -> 创建新记录
     if (!usage) {
-      console.log("Creating new usage record for user...");
       usage = await Usage.create({ 
         userId, 
         ocrCount: 0, 
@@ -37,7 +36,6 @@ router.get("/me", authMiddleware, async (req, res) => {
 
     if (needSave) {
         await usage.save();
-        console.log("Fixed dirty usage data.");
     }
 
     // 3. 计算展示逻辑

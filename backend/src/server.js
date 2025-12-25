@@ -66,7 +66,7 @@ app.use("/api/tasks", taskRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("✅ MongoDB Connection successful");
+    
     app.listen(PORT, () => {
       console.log(`🚀 Server running: http://127.0.0.1:${PORT}`);
     });

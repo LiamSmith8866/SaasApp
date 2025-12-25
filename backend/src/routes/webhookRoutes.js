@@ -6,21 +6,18 @@ const router = express.Router();
 
 router.post("/fastspring", async (req, res) => {
   try {
-    console.log("⚡️ Received a FastSpring Webhook request!");
     
     // 1. 打印收到的完整数据 (用于调试)
-    // console.log("Headers:", JSON.stringify(req.headers, null, 2));
-    // console.log("Body:", JSON.stringify(req.body, null, 2));
+   
 
     const events = req.body.events; 
 
     if (!events || !Array.isArray(events)) {
-        //console.log("⚠️ 没有检测到 events 数组");
+       
         return res.status(200).send("No events");
     }
 
     for (const event of events) {
-      console.log(`Handle event types: ${event.type}`);
 
       // 只要是订单完成，或者是订阅激活
       if (event.type === "order.completed" || event.type === "subscription.activated") {
@@ -30,7 +27,6 @@ router.post("/fastspring", async (req, res) => {
         const userId = data.tags?.userId;
 
         if (userId) {
-          console.log(`✅ Found UserID: ${userId},Under upgrade...`);
           
           // 更新数据库
           await Usage.findOneAndUpdate(
@@ -39,7 +35,6 @@ router.post("/fastspring", async (req, res) => {
           );
           await User.findByIdAndUpdate(userId, { isPro: true });
           
-          console.log(`🎉 User ${userId} Upgrade successful！`);
         } else {
             console.error("error");
         }

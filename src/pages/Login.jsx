@@ -27,13 +27,9 @@ export default function Login() {
 
     try {
       if (isLogin) {
-        console.log("Trying to log in...");
         const res = await login(email, password);
-        console.log("Login result:", res); // 👇 看控制台打印什么
-
         // 只要 success 为 true，或者后端没返回 success 但没报错，都视为成功
         if (res.success) {
-          console.log("Jump to the dashboard...");
           nav("/dashboard");
         } else {
           setError(res.message || "Login failed");
