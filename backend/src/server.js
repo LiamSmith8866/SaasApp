@@ -22,14 +22,16 @@ const PORT = 5001;
 // ==========================================
 // 1. CORS 配置 (只留这一份！核弹模式)
 // ==========================================
-app.use(
-  cors({
-    origin: true,      // ✅ 关键：自动允许当前请求的来源 (无论是 localhost 还是 vercel)
-    credentials: true, // ✅ 关键：允许带 Cookie
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://saas-app-ten-gold.vercel.app", // 你的 Vercel 域名
+    "https://saas-app-88.vercel.app"
+    // "https://www.yourdomain.com" // 如果以后买了域名加在这里
+  ],
+  credentials: true,
+  // ...
+}));
 
 // ==========================================
 // 2. 解析器配置
