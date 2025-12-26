@@ -71,7 +71,7 @@ const Upgrade = () => {
 
     try {
       window.fastspring.builder.reset();
-      window.fastspring.builder.add('pro-monthly'); // 你的产品 Path
+      window.fastspring.builder.add('technology-ocr-pro'); // 你的产品 Path
       window.fastspring.builder.tag('userId', user._id);
       window.fastspring.builder.promo('00000'); // 上线记得删掉这行！
       window.fastspring.builder.checkout();
