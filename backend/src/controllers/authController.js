@@ -55,8 +55,8 @@ export const loginUser = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // 生产环境改为 true
-      sameSite: "lax",
+      sameSite: "none",
+      secure: true, //
     });
 
     // ✅ 修复点：必须返回 user 对象，前端 Context 才能 setUser

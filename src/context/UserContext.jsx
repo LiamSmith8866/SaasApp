@@ -35,6 +35,10 @@ export const UserProvider = ({ children }) => {
       if (res.ok) {
         const data = await res.json();
         setUsage({ ...data, loading: false });
+      }else {
+        // ✅ 新增：如果后端报错 (比如 500)，也要停止 loading
+        console.error("Failed:", res.status);
+        setUsage(prev => ({ ...prev, loading: false }));
       }
     } catch (error) {
       console.error("Failed to fetch usage:", error);
