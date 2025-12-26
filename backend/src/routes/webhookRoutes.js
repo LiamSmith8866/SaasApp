@@ -8,8 +8,6 @@ router.post("/fastspring", async (req, res) => {
   try {
     
     // 1. 打印收到的完整数据 (用于调试)
-   
-
     const events = req.body.events; 
 
     if (!events || !Array.isArray(events)) {
