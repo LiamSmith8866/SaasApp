@@ -17,7 +17,7 @@ const LandingPage = () => {
       {/* 导航栏 */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <div className="text-2xl font-extrabold text-blue-600 flex items-center gap-2">
-          <Zap size={28} /> My SaaS
+          <Zap size={28} /> Technology OCR
         </div>
         <div className="space-x-4">
           {user ? (
@@ -63,7 +63,7 @@ const LandingPage = () => {
       <div className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Why choose My SaaS?</h2>
+            <h2 className="text-3xl font-bold text-gray-900">Why choose Technology OCR?</h2>
             <p className="text-gray-500 mt-2">Designed for productive teams and individuals.</p>
           </div>
 
@@ -107,13 +107,13 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="py-10 text-center text-sm text-gray-500 border-t bg-white">
         <div className="mb-4">
-          <span className="font-bold text-gray-900 text-lg">My SaaS</span>
+          <span className="font-bold text-gray-900 text-lg">Technology OCR</span>
         </div>
         <p className="mb-4">© 2025 All rights reserved.</p>
         <div className="space-x-6">
           <Link to="/privacy" className="hover:text-blue-600 transition">Privacy Policy</Link>
           <Link to="/terms" className="hover:text-blue-600 transition">Terms of Service</Link>
-          <a href="mailto:admin@technology-market.com" className="hover:text-blue-600 transition">Contact Us</a>
+          <a href="admin@technology-market.com" className="hover:text-blue-600 transition">Contact Us</a>
         </div>
       </footer>
     </div>

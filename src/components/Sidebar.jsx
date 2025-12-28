@@ -5,7 +5,7 @@ export default function Sidebar() {
   const { user, logout, fetchFullUser } = useUser();
   return (
     <div className="w-64 bg-gray-900 text-white h-screen p-5 flex flex-col">
-      <h1 className="text-2xl font-bold mb-6">My SaaS</h1>
+      <h1 className="text-2xl font-bold mb-6">Technology OCR</h1>
       <nav className="flex flex-col gap-3">
         <Link to="/" className="hover:text-blue-300">Dashboard</Link>
         <Link to="/tasks" className="hover:text-blue-300">Tasks</Link>

@@ -35,7 +35,7 @@ export default function Layout({ children }) {
       <aside className="w-64 bg-white border-r flex flex-col shadow-sm">
         <div className="h-16 flex items-center px-6 border-b">
           <span className="text-xl font-extrabold text-blue-600">
-            My SaaS
+          Technology OCR
           </span>
         </div>
 
