@@ -73,7 +73,7 @@ const Upgrade = () => {
       window.fastspring.builder.reset();
       window.fastspring.builder.add('technology-ocr-pro'); // 你的产品 Path
       window.fastspring.builder.tag('userId', user._id);
-      window.fastspring.builder.promo('00000'); // 上线记得删掉这行！
+      window.fastspring.builder.promo('TEST'); // 上线记得删掉这行！
       window.fastspring.builder.checkout();
     } catch (error) {
       console.error(error);
@@ -122,7 +122,15 @@ const Upgrade = () => {
               <span>Priority support</span>
             </li>
           </ul>
-
+          {/* Beta 优惠码提示 */}
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6 text-sm text-yellow-800 flex flex-col gap-1">
+          <p className="font-bold flex items-center gap-2">
+            🎁 Beta Tester Exclusive
+          </p>
+          <p>
+            Enter coupon code <span className="font-mono bg-yellow-200 px-1 rounded font-bold text-black">TEST</span> at checkout to get this plan for <span className="font-bold">$0.00</span>!
+          </p>
+          </div>
           <button
             onClick={handleCheckout}
             disabled={loading}

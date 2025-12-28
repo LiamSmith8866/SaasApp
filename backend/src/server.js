@@ -47,14 +47,6 @@ app.use((req, res, next) => {
   console.log(`🔥 [${new Date().toLocaleTimeString()}] Request: ${req.method} ${req.path}`);
   next();
 });
-//测试FastSpring 到底访问了哪个路径
-app.use((req, res, next) => {
-  if (req.method === 'POST') {
-    console.log(`收到 POST 请求: ${req.path}`);
-  }
-  next();
-});
-
 // ==========================================
 // 3. 路由挂载
 // ==========================================
