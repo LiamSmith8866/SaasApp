@@ -26,7 +26,9 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://saas-app-ten-gold.vercel.app", // 你的 Vercel 域名
-    "https://saas-app-88.vercel.app"
+    "https://saas-app-88.vercel.app",
+    "https://technology-market.com",
+    "https://www.technology-market.com"
     // "https://www.yourdomain.com" // 如果以后买了域名加在这里
   ],
   credentials: true,
