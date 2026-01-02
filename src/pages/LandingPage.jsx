@@ -113,7 +113,7 @@ const LandingPage = () => {
         <div className="space-x-6">
           <Link to="/privacy" className="hover:text-blue-600 transition">Privacy Policy</Link>
           <Link to="/terms" className="hover:text-blue-600 transition">Terms of Service</Link>
-          <a href="admin@technology-market.com" className="hover:text-blue-600 transition">Contact Us</a>
+          <Link to="/contact" className="hover:text-blue-600 transition">Contact Us</Link>
         </div>
       </footer>
     </div>

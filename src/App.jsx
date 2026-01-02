@@ -15,6 +15,7 @@ import UpgradeSuccess from "./pages/UpgradeSuccess";
 import UserDashboard from "./pages/UserDashboard";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Contact from "./pages/Contact";
 // --- 路由守卫组件 ---
 
 // 1. 受保护路由：只有登录才能看，且自动包裹 Layout
@@ -55,6 +56,7 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/privacy" element={<Privacy />} /> 
           <Route path="/terms" element={<Terms />} /> 
+          <Route path="/contact" element={<Contact />} /> 
           {/* 2. 登录/注册 (只给未登录用户) */}
           <Route 
             path="/login" 
