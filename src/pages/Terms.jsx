@@ -1,55 +1,53 @@
 import React from "react";
 export default function Terms() {
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "60px 24px", lineHeight: 1.7 }}>
-      <h1>Terms of Service</h1>
-      <p><b>Technology OCR</b></p>
-      <p>Last Updated: 2026-01-02</p>
-      <p>Website: https://technology-market.com</p>
+    <div className="max-w-3xl mx-auto px-6 py-16 text-gray-800">
+      <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
 
-      <h2>1. Service Description</h2>
-      <p>
-        Technology OCR is a web-based SaaS platform providing AI-powered OCR services.
+      <p className="mb-2 font-medium">Technology OCR</p>
+      <p className="mb-2">Last Updated: January 2, 2026</p>
+      <p className="mb-6">
+        Website: <a href="https://technology-market.com" className="text-blue-600 underline">https://technology-market.com</a>
       </p>
 
-      <h2>2. Eligibility</h2>
-      <p>You must be 18+ to use this service.</p>
-
-      <h2>3. Subscriptions & Billing</h2>
-      <ul>
-        <li>Monthly: $9.9</li>
-        <li>Yearly: $99</li>
-        <li>Payments are processed by FastSpring</li>
-      </ul>
-
-      <h2>4. Refund Policy</h2>
-      <p><b>All sales are final. No refunds after usage begins.</b></p>
-
-      <h2>5. Acceptable Use</h2>
-      <ul>
-        <li>No illegal content</li>
-        <li>No abuse, scraping, or attacks</li>
-        <li>No copyright violations</li>
-      </ul>
-
-      <h2>6. Account Termination</h2>
-      <p>We may suspend violating accounts.</p>
-
-      <h2>7. Intellectual Property</h2>
-      <p>
-        Technology OCR owns the platform. Users own their uploaded content.
+      <p className="mb-6">
+        By accessing or using Technology OCR, you agree to be bound by these Terms of Service.
       </p>
 
-      <h2>8. Limitation of Liability</h2>
-      <p>
-        We are not liable for OCR errors, data loss, or indirect damages.
+      <h2 className="text-xl font-semibold mt-8 mb-2">1. Service Description</h2>
+      <p className="mb-6">
+        Technology OCR provides cloud-based AI OCR services for converting images and documents into editable text.
       </p>
 
-      <h2>9. Governing Law</h2>
-      <p>International commercial law applies.</p>
+      <h2 className="text-xl font-semibold mt-8 mb-2">2. Subscriptions and Billing</h2>
+      <p className="mb-6">
+        Subscriptions are billed monthly or annually. Payments are processed by FastSpring as Merchant of Record.
+      </p>
 
-      <h2>10. Contact</h2>
-      <p>admin@technology-market.com</p>
+      <h2 className="text-xl font-semibold mt-8 mb-2">3. Refund Policy</h2>
+      <p className="mb-6">
+        Due to the digital nature of the service and instant access upon purchase, all payments are non-refundable once the service has been used.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-2">4. User Responsibilities</h2>
+      <p className="mb-6">
+        Users are responsible for ensuring they have the rights to upload and process any content used with the service.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-2">5. Prohibited Use</h2>
+      <p className="mb-6">
+        You may not use the service for unlawful, abusive, or infringing activities.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-2">6. Limitation of Liability</h2>
+      <p className="mb-6">
+        The service is provided “as is” without warranties of any kind. Technology OCR is not liable for any indirect or consequential damages.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-2">7. Governing Law</h2>
+      <p>
+        These Terms shall be governed by applicable international commercial laws without regard to conflict-of-law principles.
+      </p>
     </div>
   );
 }
