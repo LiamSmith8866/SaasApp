@@ -1,35 +1,55 @@
 import React from "react";
 export default function Terms() {
-    return (
-      <div className="legal-page">
-        <h1>Technology OCR – Terms of Service</h1>
-  
-        <p>By accessing or using Technology OCR (“Service”), you agree to be bound by these Terms of Service.</p>
-  
-        <h2>1. Description of Service</h2>
-        <p>Technology OCR is a cloud-based OCR SaaS that allows users to upload files or images to extract text online.</p>
-  
-        <h2>2. User Responsibilities</h2>
-        <p>You agree not to upload any unlawful, abusive, or infringing content.</p>
-  
-        <h2>3. Subscriptions</h2>
-        <p>Access requires an active paid subscription, billed monthly or yearly.</p>
-  
-        <h2>4. Payments</h2>
-        <p>Payments are processed by FastSpring as the authorized merchant of record.</p>
-  
-        <h2>5. Disclaimer</h2>
-        <p>The Service is provided “as is” without warranties of any kind.</p>
-  
-        <h2>6. Limitation of Liability</h2>
-        <p>We are not liable for damages arising from use of the Service.</p>
-  
-        <h2>7. Termination</h2>
-        <p>We may suspend or terminate accounts violating these terms.</p>
-  
-        <h2>8. Contact</h2>
-        <p>Contact: admin@technology-market.com</p>
-      </div>
-    );
-  }
-  
+  return (
+    <div style={{ maxWidth: 900, margin: "0 auto", padding: "60px 24px", lineHeight: 1.7 }}>
+      <h1>Terms of Service</h1>
+      <p><b>Technology OCR</b></p>
+      <p>Last Updated: 2026-01-02</p>
+      <p>Website: https://technology-market.com</p>
+
+      <h2>1. Service Description</h2>
+      <p>
+        Technology OCR is a web-based SaaS platform providing AI-powered OCR services.
+      </p>
+
+      <h2>2. Eligibility</h2>
+      <p>You must be 18+ to use this service.</p>
+
+      <h2>3. Subscriptions & Billing</h2>
+      <ul>
+        <li>Monthly: $9.9</li>
+        <li>Yearly: $99</li>
+        <li>Payments are processed by FastSpring</li>
+      </ul>
+
+      <h2>4. Refund Policy</h2>
+      <p><b>All sales are final. No refunds after usage begins.</b></p>
+
+      <h2>5. Acceptable Use</h2>
+      <ul>
+        <li>No illegal content</li>
+        <li>No abuse, scraping, or attacks</li>
+        <li>No copyright violations</li>
+      </ul>
+
+      <h2>6. Account Termination</h2>
+      <p>We may suspend violating accounts.</p>
+
+      <h2>7. Intellectual Property</h2>
+      <p>
+        Technology OCR owns the platform. Users own their uploaded content.
+      </p>
+
+      <h2>8. Limitation of Liability</h2>
+      <p>
+        We are not liable for OCR errors, data loss, or indirect damages.
+      </p>
+
+      <h2>9. Governing Law</h2>
+      <p>International commercial law applies.</p>
+
+      <h2>10. Contact</h2>
+      <p>admin@technology-market.com</p>
+    </div>
+  );
+}
