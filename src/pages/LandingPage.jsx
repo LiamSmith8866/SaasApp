@@ -109,7 +109,7 @@ const LandingPage = () => {
         <div className="mb-4">
           <span className="font-bold text-gray-900 text-lg">Technology OCR</span>
         </div>
-        <p className="mb-4">© 2026 All rights reserved.</p>
+        <p className="mb-4">© {new Date().getFullYear()} Technology OCR. All rights reserved.</p>
         <div className="space-x-6">
           <Link to="/privacy" className="hover:text-blue-600 transition">Privacy Policy</Link>
           <Link to="/terms" className="hover:text-blue-600 transition">Terms of Service</Link>
