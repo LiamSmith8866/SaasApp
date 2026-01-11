@@ -115,6 +115,14 @@ const LandingPage = () => {
           <Link to="/terms" className="hover:text-blue-600 transition">Terms of Service</Link>
           <Link to="/contact" className="hover:text-blue-600 transition">Contact Us</Link>
         </div>
+        <div className="mt-4 opacity-50 hover:opacity-100 transition text-xs">
+          {/* 如果他们给的是 HTML 字符串，你需要转换成 JSX 格式 */}
+          {/* 假设给的是纯文本链接: */}
+          <a href="https://dang.ai/" target="_blank" ><img src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png" 
+          alt="Dang.ai" style="width: 150px; height: 54px;" width="150" height="54"/></a>
+          
+          {/* 如果给的是带图片的 embed code，请把 class 换成 className */}
+        </div>
       </footer>
     </div>
   );
