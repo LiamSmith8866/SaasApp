@@ -114,7 +114,7 @@ const LandingPage = () => {
                 Pro Unlimited <Star size={18} className="text-yellow-400 fill-yellow-400"/>
               </h3>
               <div className="mt-4 flex items-baseline">
-                <span className="text-4xl font-extrabold text-gray-900">$9.9</span>
+                <span className="text-4xl font-extrabold text-gray-900">$9.99</span>
                 <span className="ml-1 text-gray-500">/ month</span>
               </div>
               <p className="mt-4 text-gray-500">For professionals who need unlimited productivity.</p>

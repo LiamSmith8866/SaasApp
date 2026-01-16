@@ -108,7 +108,7 @@ const Upgrade = () => {
           </div>
           
           <div className="flex items-baseline mb-6">
-            <span className="text-5xl font-extrabold text-gray-900">$9.9</span>
+            <span className="text-5xl font-extrabold text-gray-900">$9.99</span>
             <span className="text-gray-500 ml-2">/ month</span>
           </div>
 
